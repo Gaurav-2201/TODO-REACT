@@ -6,7 +6,7 @@ const TodoLayout = () => {
     const [isModalVisible, setIsModalVisible] =useState(false);
     const [inputValue1, setInputValue1] = useState('');
     const [inputValue2, setInputValue2] = useState('');
-    const [showCard, setShowCard] = useState(true);
+    // const [showCard, setShowCard] = useState(true);
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -14,7 +14,7 @@ const TodoLayout = () => {
 
     const handleOk = () => {
         setIsModalVisible(false);
-        setShowCard(true);
+        // setShowCard(true);
     }
 
     const handleCancel = () => {
@@ -30,12 +30,10 @@ const TodoLayout = () => {
             setInputValue2(value);
         }
     }
-
-    Data.map((curElem) => {
-        const {id, inputField1, inputField2} = curElem;
-        console.log(id, inputField1, inputField2);
+    // const renderedCards = Data.map((curElem) => {
+    //     const {id, inputField1, inputField2} = curElem;
+    //     console.log(id, inputField1, inputField2);
     return(
-        <>
         <div>
         <h3>Welcome to TODO page</h3>
         <Button type = "primary" onClick={showModal}>Click to create a task</Button>
@@ -49,17 +47,21 @@ const TodoLayout = () => {
             <Input type = "primary" placeholder="Enter the task to do" value={inputValue1} onChange={(e) => handleInputChange(e, 1)}></Input>
             <Input type = "primary" placeholder="Enter a brief description of the task" value={inputValue2} onChange={(e) => handleInputChange(e, 2)}></Input>
         </Modal>
-        {showCard && (
-            <Card key = {id} title="Input Values">
+        {Data.map((curElem) => {
+            const{id, inputField1, inputField2} = curElem;
+            // {showCard && 
+                return(
+            <Card key = {curElem.id} title="Input Values">
                 <p>Task: {curElem.inputField1}</p> 
                 <p>Description: {curElem.inputField2}</p>
             </Card>
         )}
+            )
+        }
         </div>
-        </>
     );
         }
-    );
-};
+    // return <>{renderedCards};</>
+
 
 export default TodoLayout;
